@@ -7,6 +7,6 @@ import ru.chepikov.linkshortener.utils.Constant;
 public class LinkService {
 
     public String generateShortLink(CreateShortLinkRequest request) {
-        return RandomStringUtils.randomAlphanumeric(Constant.STRING_LENGTH);
+        return RandomStringUtils.randomAlphanumeric(Constant.SHORT_LINK_LENGTH);
     }
 }

@@ -1,5 +1,5 @@
 package ru.chepikov.linkshortener.utils;
 
 public class Constant {
-    public static final int STRING_LENGTH = 8;
+    public static final int SHORT_LINK_LENGTH = 8;
 }

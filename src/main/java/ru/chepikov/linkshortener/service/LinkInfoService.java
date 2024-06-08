@@ -25,7 +25,7 @@ public class LinkInfoService {
     public LinkInfo getByShortLink(String shortLink) {
         return linkInfoRepository.findByShortLink(shortLink)
                 .orElseThrow(
-                        () -> new NotFoundException("do not found short link")
+                        () -> new NotFoundException(String.format("do not found short link %s", shortLink))
                 );
     }
 

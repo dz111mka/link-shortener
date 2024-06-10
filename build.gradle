@@ -8,7 +8,14 @@ group 'ru.chepikov'
 version '1.0-SNAPSHOT'
 
 repositories {
+    mavenLocal()
     mavenCentral()
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
 
 dependencies {
@@ -17,4 +24,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.32'
     implementation 'org.apache.commons:commons-lang3:3.14.0'
 
+    implementation 'ru.chepikov:logging-starter-maven:1.0-SNAPSHOT'
+
+    implementation 'ru.chepikov:logging-starter-gradle:1.0-SNAPSHOT'
 }

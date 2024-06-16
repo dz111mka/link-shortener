@@ -14,7 +14,6 @@ public class LinkInfoRepositoryImpl implements LinkInfoRepository {
 
     private final Map<String, LinkInfo> data = new ConcurrentHashMap<>();
 
-
     @Override
     public Optional<LinkInfo> findByShortLink(String shortLink) {
         return Optional.ofNullable(data.get(shortLink));
@@ -25,6 +24,5 @@ public class LinkInfoRepositoryImpl implements LinkInfoRepository {
         linkInfo.setId(UUID.randomUUID());
         data.put(linkInfo.getShortLink(), linkInfo);
         return linkInfo;
-
     }
 }

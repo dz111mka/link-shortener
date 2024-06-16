@@ -12,9 +12,7 @@ repositories {
     mavenCentral()
 }
 
-
 compileJava.options.encoding = 'UTF-8'
-
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -28,7 +26,4 @@ dependencies {
 
     implementation 'ru.chepikov:logging-starter-maven:1.0-SNAPSHOT'
 
-/*
-    implementation 'ru.chepikov:logging-starter-gradle:1.0-SNAPSHOT'
-*/
 }

@@ -5,8 +5,10 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
@@ -18,6 +20,8 @@ import java.util.Map;
 
 @Component
 @Slf4j
+@Profile("dev")
+@ConditionalOnProperty(prefix = "link-shortener", name = "enable-log-exec-time")
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class LogExecutionTimeBeanPostProcessor implements BeanPostProcessor {
 

@@ -21,7 +21,7 @@ import java.util.Map;
 @Component
 @Slf4j
 @Profile("dev")
-@ConditionalOnProperty(prefix = "link-shortener", name = "enable-log-exec-time")
+@ConditionalOnProperty(prefix = "link-shortener", name = "enable-log-exec-time", havingValue = "true")
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class LogExecutionTimeBeanPostProcessor implements BeanPostProcessor {
 

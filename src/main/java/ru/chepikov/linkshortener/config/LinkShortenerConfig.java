@@ -11,7 +11,6 @@ public class LinkShortenerConfig {
     @Autowired
     private LinkInfoService service;
 
-
     @PostConstruct
     public void pc() {
         System.out.println(service);

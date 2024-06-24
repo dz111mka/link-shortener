@@ -1,12 +1,8 @@
 package ru.chepikov.linkshortener.dto;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.time.ZonedDateTime;
 import java.util.StringJoiner;
@@ -17,26 +13,18 @@ import java.util.StringJoiner;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateShortLinkRequest {
+
+    @NotEmpty(message = "Ссылка не может быть пустой")
+    @Size(min = 10, max = 4096, message = "Длина ссылки не может быть меньше 10 и больше 4096")
+    @Pattern(regexp = "https?://.+\\..+", message = "Ссылка не соответсвует паттерну URL")
     String link;
+    @Future(message = "дата окончания ссылки должна быть в будущем")
     ZonedDateTime endTime;
+    @NotEmpty(message = "Описание не может быть пустым")
     String description;
-    boolean active;
+    @NotNull(message = "Не может быть пустым")
+    Boolean active;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        CreateShortLinkRequest request = (CreateShortLinkRequest) o;
-
-        return new EqualsBuilder().append(active, request.active).append(link, request.link).append(endTime, request.endTime).append(description, request.description).isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(link).append(endTime).append(description).append(active).toHashCode();
-    }
 
     @Override
     public String toString() {

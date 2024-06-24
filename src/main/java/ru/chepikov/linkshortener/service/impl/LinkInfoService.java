@@ -8,6 +8,7 @@ import ru.chepikov.linkshortener.beanpostprocessor.LogExecutionTime;
 import ru.chepikov.linkshortener.dto.CreateShortLinkRequest;
 import ru.chepikov.linkshortener.dto.CreateShortLinkResponse;
 import ru.chepikov.linkshortener.exeption.NotFoundException;
+import ru.chepikov.linkshortener.mapper.LinkInfoMapper;
 import ru.chepikov.linkshortener.model.LinkInfo;
 import ru.chepikov.linkshortener.property.LinkShortenerProperty;
 import ru.chepikov.linkshortener.repository.LinkInfoRepository;
@@ -21,29 +22,21 @@ public class LinkInfoService {
     @Autowired
     LinkInfoRepository repository;
 
+    @Autowired
+    LinkInfoMapper mapper;
+
     public LinkInfoService() {
     }
 
     @LogExecutionTime
     public CreateShortLinkResponse createLinkInfo(CreateShortLinkRequest request) {
-        LinkInfo linkInfo = new LinkInfo();
-        linkInfo.setLink(request.getLink());
-        linkInfo.setEndTime(request.getEndTime());
-        linkInfo.setDescription(request.getDescription());
-        linkInfo.setActive(request.isActive());
+        LinkInfo linkInfo = mapper.fromCreateRequest(request);
         linkInfo.setShortLink(RandomStringUtils.randomAlphanumeric(property.getShortLinkLength()));
         linkInfo.setOpeningCount(0L);
 
         repository.save(linkInfo);
 
-        return CreateShortLinkResponse.builder()
-                .id(linkInfo.getId())
-                .link(linkInfo.getLink())
-                .endTime(linkInfo.getEndTime())
-                .description(linkInfo.getDescription())
-                .active(linkInfo.isActive())
-                .shortLink(linkInfo.getShortLink())
-                .build();
+        return mapper.toResponse(linkInfo);
     }
 
     @LogExecutionTime
